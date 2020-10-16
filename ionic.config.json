@@ -1,0 +1,7 @@
+{
+  "name": "mars-rover-photos",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
