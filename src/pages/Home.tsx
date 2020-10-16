@@ -1,6 +1,6 @@
-import MessageListItem from '../components/MessageListItem';
-import React, { useState } from 'react';
-import { Message, getMessages } from '../data/messages';
+import MessageListItem from "../components/MessageListItem";
+import React, { useState } from "react";
+import { Message, getMessages } from "../data/messages";
 import {
   IonContent,
   IonHeader,
@@ -10,12 +10,11 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
-  useIonViewWillEnter
-} from '@ionic/react';
-import './Home.css';
+  useIonViewWillEnter,
+} from "@ionic/react";
+import "./Home.css";
 
 const Home: React.FC = () => {
-
   const [messages, setMessages] = useState<Message[]>([]);
 
   useIonViewWillEnter(() => {
@@ -33,7 +32,7 @@ const Home: React.FC = () => {
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Inbox</IonTitle>
+          <IonTitle>Mars Rover Photos</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -43,14 +42,14 @@ const Home: React.FC = () => {
 
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">
-              Inbox
-            </IonTitle>
+            <IonTitle size="large">Inbox</IonTitle>
           </IonToolbar>
         </IonHeader>
 
         <IonList>
-          {messages.map(m => <MessageListItem key={m.id} message={m} />)}
+          {messages.map((m) => (
+            <MessageListItem key={m.id} message={m} />
+          ))}
         </IonList>
       </IonContent>
     </IonPage>
