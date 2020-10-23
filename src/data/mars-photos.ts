@@ -1,5 +1,4 @@
-import axios, { AxiosError,AxiosRequestConfig } from 'axios'
-import constants from '../constants'
+import axios from 'axios'
 export type Photo  = {
     id: number
     sol: number
@@ -21,8 +20,9 @@ export type Photo  = {
 }
 
 // import Constants from '../constants'
-
+const api = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3"
 const nasa_api : string = "https://api.nasa.gov/mars-photos/api/v1"
+const heroku_nasa_api = "https://mars-photos.herokuapp.com/api/v1/"
 const photos_url = "/rovers/curiosity/photos"
 const api_key = "9QrwGIrIhZ6qv4zxfELJ41ZHcLWE90xtdffHBrQm"
 
@@ -36,14 +36,15 @@ let dateChosen = "2015-6-3"
 function getPhotosFromApi() {
       return axios({
         method: 'get',
-        url: nasa_api,
+        url: heroku_nasa_api,
         responseType: 'json',
         params: {
             earth_date: dateChosen
         },
         headers: {
-            'x-auth-token': api_key,
-            "content-type": "application/json"
+            'x-auth-token': 'DEMO_KEY',
+            "content-type": "application/json",
+            "Access-Control-Allow-Origin": "*"
         }
       })
       
@@ -51,14 +52,17 @@ function getPhotosFromApi() {
     }
 
 export function getPhotos(){
-    getPhotosFromApi().then(resp => resp.data)
+    return getPhotosFromApi().then(resp => resp.data)
     .catch(error => {
         if (error.response) {
             console.log(error.response.data)
             console.log(error.response.status)
             console.log(error.response.headers)
+            console.log("response error\\\\\\\\\\")
           } else if (error.request) {
             console.log(`No response received: ${error.request}`)
+            console.log(error.request.status)
+            console.log(error.request.statusText)
           } else {
             console.log(`Error setting up request: ${error.message}`)
           }

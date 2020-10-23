@@ -1,9 +1,11 @@
-import MessageListItem from "../components/MessageListItem";
-import React, { useState } from "react";
+import MessageListItem from "../components/PhotoListITem";
+import React, { useEffect, useState } from "react";
 import { Message, getMessages } from "../data/messages";
+import { Photo, getPhotos } from "../data/mars-photos";
 import {
   IonContent,
   IonHeader,
+  IonDatetime,
   IonList,
   IonPage,
   IonRefresher,
@@ -16,6 +18,8 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const [messages, setMessages] = useState<Message[]>([]);
+  const [photos, setPhotos] = useState<Photo[]>([]);
+  const [dateSelect, setDateSelect] = useState();
 
   useIonViewWillEnter(() => {
     const msgs = getMessages();
@@ -27,7 +31,10 @@ const Home: React.FC = () => {
       e.detail.complete();
     }, 3000);
   };
-
+  useEffect(() => {
+    const m = async () => getPhotos().then((w) => setPhotos(w.data));
+    m();
+  });
   return (
     <IonPage id="home-page">
       <IonHeader>
@@ -42,12 +49,15 @@ const Home: React.FC = () => {
 
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Inbox</IonTitle>
+            <IonTitle size="large">Mars Rover Photos</IonTitle>
           </IonToolbar>
         </IonHeader>
-
+        <IonDatetime
+          value="2019-10-01T15:43:40.394Z"
+          display-timezone="utc"
+        ></IonDatetime>
         <IonList>
-          {messages.map((m) => (
+          {photos.map((m) => (
             <MessageListItem key={m.id} message={m} />
           ))}
         </IonList>
