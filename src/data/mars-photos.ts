@@ -22,7 +22,7 @@ export type Photo  = {
 // import Constants from '../constants'
 const api = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?earth_date=2015-6-3"
 const nasa_api : string = "https://api.nasa.gov/mars-photos/api/v1"
-const heroku_nasa_api = "https://mars-photos.herokuapp.com/api/v1/"
+const heroku_nasa_api = "https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/"
 const photos_url = "/rovers/curiosity/photos"
 const api_key = "9QrwGIrIhZ6qv4zxfELJ41ZHcLWE90xtdffHBrQm"
 

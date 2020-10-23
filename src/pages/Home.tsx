@@ -32,9 +32,10 @@ const Home: React.FC = () => {
     }, 3000);
   };
   useEffect(() => {
-    const m = async () => getPhotos().then((w) => setPhotos(w.data));
+    const m = () => getPhotos().then((w) => setPhotos(w.data));
     m();
   });
+  const p = photos ? photos : [];
   return (
     <IonPage id="home-page">
       <IonHeader>
@@ -57,7 +58,7 @@ const Home: React.FC = () => {
           display-timezone="utc"
         ></IonDatetime>
         <IonList>
-          {photos.map((m) => (
+          {p.map((m) => (
             <MessageListItem key={m.id} message={m} />
           ))}
         </IonList>
