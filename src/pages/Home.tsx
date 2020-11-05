@@ -20,15 +20,16 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState();
+  const [date, setDate] = useState(new Date());
 
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
       e.detail.complete();
     }, 3000);
   };
-  const pics = () =>
-    getPhotosFromApi()
+
+  const pics = (date: String) =>
+    getPhotosFromApi(date)
       .then((resp) => resp.data)
       .then(
         (images) => {
@@ -52,7 +53,7 @@ const Home: React.FC = () => {
       );
 
   useIonViewWillEnter(() => {
-    pics();
+    pics(date);
   });
 
   return (

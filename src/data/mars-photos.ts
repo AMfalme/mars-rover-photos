@@ -31,7 +31,7 @@ let dateChosen = "2015-6-3"
 
 
 
-export function getPhotosFromApi() {
+export function getPhotosFromApi(dateChosen: String) {
       return axios({
         method: 'get',
         url: heroku_nasa_mars_rover_api,

@@ -23,9 +23,7 @@ import {
   IonTabButton,
   IonItem,
 } from "@ionic/react";
-import firebase from "@firebase/app";
-import "@firebase/firestore";
-import { FirestoreProvider } from "react-firestore";
+
 import { bookmark, heart, heartOutline } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
 import "./ViewPhoto.css";
