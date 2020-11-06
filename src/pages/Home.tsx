@@ -20,7 +20,7 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState("2015-6-3");
 
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
@@ -29,7 +29,7 @@ const Home: React.FC = () => {
   };
 
   const pics = (date: String) =>
-    getPhotosFromApi(date)
+    getPhotosFromApi()
       .then((resp) => resp.data)
       .then(
         (images) => {

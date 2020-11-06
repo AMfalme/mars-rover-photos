@@ -24,14 +24,25 @@ export type Photo  = {
 const nasa_mars_rover_api : string = "https://api.nasa.gov/mars-photos/api/v1"
 const heroku_nasa_mars_rover_api = "https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/photos"
 
-let dateChosen = "2015-6-3"
+const dateToShortFormat = function (date: Date) {
+    let day = date.getDate();
+  
+    let monthIndex = date.getMonth();
+  
+    let year = date.getFullYear();
+    const selectedDate = `${year}-${monthIndex}-${day}` 
+    console.log(selectedDate)
+    return selectedDate;
+  };
+
+let dateChosen = dateToShortFormat(new Date())
 
 
 // This section returns a promise which does not seem to be returning expected values
 
 
 
-export function getPhotosFromApi(dateChosen: String) {
+export function getPhotosFromApi() {
       return axios({
         method: 'get',
         url: heroku_nasa_mars_rover_api,

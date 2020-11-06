@@ -23,21 +23,17 @@ import {
   IonTabButton,
   IonItem,
 } from "@ionic/react";
-
 import { bookmark, heart, heartOutline } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
 import "./ViewPhoto.css";
-
+import { db, fireStore } from "../firebaseConfig";
+import firebase from "firebase";
 interface ViewMessageProps extends RouteComponentProps<{ id: string }> {}
-
-const config = {
-  apiKey: "<your_api_key>",
-  projectId: "<your_firebase_project_id>",
-};
 
 const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
   const [photo, setPhoto] = useState<Photo>();
   const [favorite, setFavorite] = useState(false);
+  const imgId = parseInt(match.params.id, 10);
   const getPic = (id: number) =>
     getPhotosFromApi()
       .then((resp) => resp.data)
@@ -65,14 +61,20 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
         }
       );
   useIonViewWillEnter(() => {
-    getPic(parseInt(match.params.id, 10));
+    getPic(imgId);
   });
-  const favoritePhoto = () => {
-    if (favorite) {
-      setFavorite(false);
-    } else {
-      setFavorite(true);
-    }
+  const onClickLike = () => {
+    fireStore.collection("Photos").doc(match.params.id).set({
+      first: "Ada",
+      last: "Lovelace",
+      born: 1815,
+    });
+    // .then(function (docRef: number) {
+    //   console.log("Document written with ID: ", docRef);
+    // })
+    // .catch(function (error: String) {
+    //   console.error("Error adding document: ", error);
+    // });
   };
   return (
     <IonPage id="view-message-page">
@@ -89,8 +91,8 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
           <IonCard>
             <IonImg src={photo.img_src} class="photo-size" />
             <IonCardHeader>
-              <IonCardSubtitle>Card Subtitle</IonCardSubtitle>
-              <IonCardTitle>Card Title</IonCardTitle>
+              <IonCardSubtitle>{photo.camera.full_name}</IonCardSubtitle>
+              <IonCardTitle>{photo.rover.name}</IonCardTitle>
             </IonCardHeader>
           </IonCard>
 
@@ -104,7 +106,7 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
             </IonTabButton>
           </IonItem>
           <IonFab vertical="bottom" horizontal="center" slot="fixed">
-            <IonFabButton onClick={() => favoritePhoto()}>
+            <IonFabButton onClick={onClickLike}>
               <IonIcon icon={favorite ? heart : heartOutline}></IonIcon>
             </IonFabButton>
           </IonFab>
