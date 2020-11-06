@@ -1,6 +1,10 @@
 import PhotoListItem from "../components/PhotoListItem";
 import React, { useEffect, useState } from "react";
-import { Photo, getPhotosFromApi } from "../data/mars-photos";
+import {
+  Photo,
+  getPhotosFromApi,
+  dateToShortFormat,
+} from "../data/mars-photos";
 import {
   IonContent,
   IonHeader,
@@ -15,12 +19,14 @@ import {
   IonLabel,
   IonListHeader,
   IonButton,
+  useIonViewDidEnter,
+  useIonViewDidLeave,
 } from "@ionic/react";
 import "./Home.css";
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState("2015-6-3");
+  const [date, setDate] = useState(dateToShortFormat(new Date()));
 
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
@@ -56,6 +62,15 @@ const Home: React.FC = () => {
     pics(date);
   });
 
+  const onSelectDate = (e: any) => {
+    const stringDate = new Date(e);
+    const newDate = dateToShortFormat(stringDate);
+    console.log(newDate);
+    console.log("dateChanged");
+    setDate(newDate);
+    pics(newDate);
+  };
+
   return (
     <IonPage id="home-page">
       <IonHeader>
@@ -74,8 +89,9 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonDatetime
-          value="2019-10-01T15:43:40.394Z"
+          value={date}
           display-timezone="utc"
+          onIonChange={(e) => onSelectDate(e.detail.value!)}
         ></IonDatetime>
         <IonContent>
           <IonList>

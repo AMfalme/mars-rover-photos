@@ -24,7 +24,7 @@ export type Photo  = {
 const nasa_mars_rover_api : string = "https://api.nasa.gov/mars-photos/api/v1"
 const heroku_nasa_mars_rover_api = "https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/photos"
 
-const dateToShortFormat = function (date: Date) {
+export const dateToShortFormat = function (date: Date) {
     let day = date.getDate();
   
     let monthIndex = date.getMonth();

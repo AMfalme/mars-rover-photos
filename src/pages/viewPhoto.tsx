@@ -64,17 +64,16 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
     getPic(imgId);
   });
   const onClickLike = () => {
-    fireStore.collection("Photos").doc(match.params.id).set({
-      first: "Ada",
-      last: "Lovelace",
-      born: 1815,
-    });
-    // .then(function (docRef: number) {
-    //   console.log("Document written with ID: ", docRef);
-    // })
-    // .catch(function (error: String) {
-    //   console.error("Error adding document: ", error);
-    // });
+    fireStore
+      .collection("Photos")
+      .doc(match.params.id)
+      .set({ ...photo!!, likes: +1 })
+      .then(function (value: void) {
+        console.log("Document written with : ", value);
+      })
+      .catch(function (error: String) {
+        console.error("Error adding document: ", error);
+      });
   };
   return (
     <IonPage id="view-message-page">
