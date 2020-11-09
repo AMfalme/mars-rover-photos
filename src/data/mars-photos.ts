@@ -32,23 +32,24 @@ export const dateToShortFormat = function (date: Date) {
     let year = date.getFullYear();
     const selectedDate = `${year}-${monthIndex}-${day}` 
     console.log(selectedDate)
-    return selectedDate;
+    return selectedDate
   };
 
-let dateChosen = dateToShortFormat(new Date())
+let dateToday = dateToShortFormat(new Date())
 
 
 // This section returns a promise which does not seem to be returning expected values
 
 
 
-export function getPhotosFromApi() {
+export function getPhotosFromApi(dateChosen: String) {
+    
       return axios({
         method: 'get',
         url: heroku_nasa_mars_rover_api,
         responseType: 'json',
         params: {
-            earth_date: dateChosen
+            earth_date: dateChosen ? dateChosen : dateToday
         },
         headers: {
             'x-auth-token': 'DEMO_KEY',

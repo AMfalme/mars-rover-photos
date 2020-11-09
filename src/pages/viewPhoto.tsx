@@ -1,5 +1,9 @@
 import React, { useState } from "react";
-import { Photo, getPhotosFromApi } from "../data/mars-photos";
+import {
+  Photo,
+  getPhotosFromApi,
+  dateToShortFormat,
+} from "../data/mars-photos";
 import {
   IonBackButton,
   IonButtons,
@@ -35,7 +39,7 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
   const [favorite, setFavorite] = useState(false);
   const imgId = parseInt(match.params.id, 10);
   const getPic = (id: number) =>
-    getPhotosFromApi()
+    getPhotosFromApi(dateToShortFormat(new Date()))
       .then((resp) => resp.data)
       .then(
         (images) => {

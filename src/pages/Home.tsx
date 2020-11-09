@@ -26,16 +26,15 @@ import "./Home.css";
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState(dateToShortFormat(new Date()));
-
+  const [date, setDate] = useState<String>("2015-6-3");
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
       e.detail.complete();
     }, 3000);
   };
 
-  const pics = (date: String) =>
-    getPhotosFromApi()
+  const pics = (selectedDate: String) =>
+    getPhotosFromApi(selectedDate)
       .then((resp) => resp.data)
       .then(
         (images) => {
@@ -59,13 +58,13 @@ const Home: React.FC = () => {
       );
 
   useIonViewWillEnter(() => {
-    pics(date);
+    pics("2015-6-3");
   });
 
   const onSelectDate = (e: any) => {
     const stringDate = new Date(e);
     const newDate = dateToShortFormat(stringDate);
-    console.log(newDate);
+    console.log(e);
     console.log("dateChanged");
     setDate(newDate);
     pics(newDate);
@@ -89,7 +88,7 @@ const Home: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <IonDatetime
-          value={date}
+          value="2015-6-3"
           display-timezone="utc"
           onIonChange={(e) => onSelectDate(e.detail.value!)}
         ></IonDatetime>
