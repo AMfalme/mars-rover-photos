@@ -27,3 +27,12 @@ npm install
 ionic serve
 
 ```
+
+To run the application using ionic capacitor, simply install capacitor and run as follows.
+
+```
+npm install @capacitor/cli@latest
+
+
+ionic capacitor run android -l
+```
