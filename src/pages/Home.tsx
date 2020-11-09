@@ -1,5 +1,5 @@
 import PhotoListItem from "../components/PhotoListItem";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Photo,
   getPhotosFromApi,
@@ -18,9 +18,6 @@ import {
   useIonViewWillEnter,
   IonLabel,
   IonListHeader,
-  IonButton,
-  useIonViewDidEnter,
-  useIonViewDidLeave,
 } from "@ionic/react";
 import "./Home.css";
 

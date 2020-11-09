@@ -3,7 +3,7 @@
   <access origin="*" />
   
   <feature name="FirebasePlugin">
-    <param name="android-package" value="org.apache.cordova.firebase.FirebasePlugin"/>
+    <param name="ios-package" value="FirebasePlugin"/>
     <param name="onload" value="true"/>
   </feature>
 

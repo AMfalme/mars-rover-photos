@@ -1,4 +1,3 @@
-import { Firebase } from "@ionic-native/firebase";
 import app from "firebase/app";
 import firebase from "firebase/app";
 // Required for side-effects

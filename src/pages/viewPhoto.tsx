@@ -10,9 +10,6 @@ import {
   IonContent,
   IonHeader,
   IonIcon,
-  IonRouterOutlet,
-  IonLabel,
-  IonNote,
   IonPage,
   IonToolbar,
   useIonViewWillEnter,
@@ -30,8 +27,7 @@ import {
 import { bookmark, heart, heartOutline } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
 import "./ViewPhoto.css";
-import { db, fireStore } from "../firebaseConfig";
-import firebase from "firebase";
+import { fireStore } from "../firebaseConfig";
 interface ViewMessageProps extends RouteComponentProps<{ id: string }> {}
 
 const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
