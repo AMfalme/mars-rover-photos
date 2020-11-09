@@ -49,7 +49,7 @@ export function getPhotosFromApi(dateChosen: String) {
         url: heroku_nasa_mars_rover_api,
         responseType: 'json',
         params: {
-            earth_date: dateChosen ? dateChosen : dateToday
+            earth_date: dateChosen 
         },
         headers: {
             'x-auth-token': 'DEMO_KEY',

@@ -35,4 +35,5 @@ npm install @capacitor/cli@latest
 
 
 ionic capacitor run android -l
+ionic capacitor run ios -l
 ```
