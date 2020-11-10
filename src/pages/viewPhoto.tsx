@@ -28,14 +28,16 @@ import { bookmark, heart, heartOutline } from "ionicons/icons";
 import { RouteComponentProps } from "react-router";
 import "./ViewPhoto.css";
 import { fireStore } from "../firebaseConfig";
-interface ViewMessageProps extends RouteComponentProps<{ id: string }> {}
+interface ViewMessageProps
+  extends RouteComponentProps<{ id: string; date: string }> {}
 
 const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
   const [photo, setPhoto] = useState<Photo>();
   const [favorite, setFavorite] = useState(false);
   const imgId = parseInt(match.params.id, 10);
+  const date = match.params.date;
   const getPic = (id: number) =>
-    getPhotosFromApi(dateToShortFormat(new Date()))
+    getPhotosFromApi(date)
       .then((resp) => resp.data)
       .then(
         (images) => {
@@ -74,6 +76,7 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
       .catch(function (error: String) {
         console.error("Error adding document: ", error);
       });
+    setFavorite(true);
   };
   return (
     <IonPage id="view-message-page">

@@ -18,12 +18,15 @@ import {
   useIonViewWillEnter,
   IonLabel,
   IonListHeader,
+  useIonViewDidLeave,
+  useIonViewDidEnter,
 } from "@ionic/react";
 import "./Home.css";
-
+dateToShortFormat(new Date());
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState<String>("2015-6-3");
+  const [date, setDate] = useState<string>(dateToShortFormat(new Date()));
+
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
       e.detail.complete();
@@ -35,7 +38,9 @@ const Home: React.FC = () => {
       .then((resp) => resp.data)
       .then(
         (images) => {
+          console.log("fetched photos");
           setPhotos(images.photos);
+          console.log(date);
         },
         (error) => {
           if (error.response) {
@@ -54,16 +59,16 @@ const Home: React.FC = () => {
         }
       );
 
-  useIonViewWillEnter(() => {
-    pics("2015-6-3");
-  });
+  useIonViewDidEnter(() => {
+    pics(date);
+  }, []);
 
   const onSelectDate = (e: any) => {
-    const stringDate = new Date(e);
+    const stringDate = new Date(e.detail.value);
+    console.log(stringDate);
     const newDate = dateToShortFormat(stringDate);
     console.log(e);
-    console.log("dateChanged");
-    setDate(newDate);
+    console.log(newDate);
     pics(newDate);
   };
 
@@ -78,16 +83,15 @@ const Home: React.FC = () => {
         <IonRefresher slot="fixed" onIonRefresh={refresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
-
         <IonHeader collapse="condense">
           <IonToolbar>
             <IonTitle size="large">Mars Rover Photos</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonDatetime
-          value="2015-6-3"
-          display-timezone="utc"
-          onIonChange={(e) => onSelectDate(e.detail.value!)}
+          value={date}
+          displayTimezone="utc"
+          onIonChange={(e) => onSelectDate(e)}
         ></IonDatetime>
         <IonContent>
           <IonList>

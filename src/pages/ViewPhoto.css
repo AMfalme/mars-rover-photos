@@ -2,3 +2,7 @@
   max-height: 500px;
   width: 100%;
 }
+.photo-size img {
+  width: 100%;
+  height: 100%;
+}

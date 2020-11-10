@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">mars-rover-photos</string>
     <string name="title_activity_main">mars-rover-photos</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="package_name">io.Afalme.com</string>
+    <string name="custom_url_scheme">io.Afalme.com</string>
 </resources>

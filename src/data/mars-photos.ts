@@ -25,6 +25,7 @@ const nasa_mars_rover_api : string = "https://api.nasa.gov/mars-photos/api/v1"
 const heroku_nasa_mars_rover_api = "https://mars-photos.herokuapp.com/api/v1/rovers/curiosity/photos"
 
 export const dateToShortFormat = function (date: Date) {
+    console.log(date);
     let day = date.getDate();
   
     let monthIndex = date.getMonth();
@@ -35,7 +36,7 @@ export const dateToShortFormat = function (date: Date) {
     return selectedDate
   };
 
-let dateToday = dateToShortFormat(new Date())
+
 
 
 // This section returns a promise which does not seem to be returning expected values

@@ -29,7 +29,7 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route path="/home" component={Home} exact={true} />
-        <Route path="/photo/:id" component={viewPhoto} exact={true} />
+        <Route path="/photo/:id/:date" component={viewPhoto} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
       </IonRouterOutlet>
     </IonReactRouter>

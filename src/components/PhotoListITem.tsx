@@ -9,7 +9,10 @@ interface PhotoListItemProps {
 
 const PhotoListItem: React.FC<PhotoListItemProps> = ({ photo }) => {
   return (
-    <IonItem routerLink={`/photo/${photo.id}`} detail={false}>
+    <IonItem
+      routerLink={`/photo/${photo.id}/${photo.earth_date}`}
+      detail={false}
+    >
       <div slot="end" className="dot dot-unread"></div>
       <IonLabel className="ion-text-wrap">
         <h2>
