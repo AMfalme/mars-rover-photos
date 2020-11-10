@@ -15,18 +15,22 @@ import {
   IonRefresherContent,
   IonTitle,
   IonToolbar,
+  IonIcon,
   useIonViewWillEnter,
   IonLabel,
   IonListHeader,
   useIonViewDidLeave,
   useIonViewDidEnter,
+  IonButtons,
+  IonSegment,
+  IonSegmentButton,
 } from "@ionic/react";
 import "./Home.css";
-dateToShortFormat(new Date());
+
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
-  const [date, setDate] = useState<string>(dateToShortFormat(new Date()));
-
+  const [date, setDate] = useState<string>(new Date().toString());
+  const [count, setCount] = useState(0);
   const refresh = (e: CustomEvent) => {
     setTimeout(() => {
       e.detail.complete();
@@ -60,12 +64,17 @@ const Home: React.FC = () => {
       );
 
   useIonViewDidEnter(() => {
-    pics(date);
-  }, []);
+    pics(dateToShortFormat(new Date(date)));
+    console.log(date);
+  });
 
   const onSelectDate = (e: any) => {
+    console.log("Selected Date");
     const stringDate = new Date(e.detail.value);
     console.log(stringDate);
+    console.log("count times");
+    setCount(count + 1);
+    console.log(count);
     const newDate = dateToShortFormat(stringDate);
     console.log(e);
     console.log(newDate);
@@ -76,7 +85,10 @@ const Home: React.FC = () => {
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Mars Rover Photos </IonTitle>
+          <IonSegment>
+            <IonSegmentButton value="new">Mars Rover Images</IonSegmentButton>
+            <IonSegmentButton value="hot">Favorited Images</IonSegmentButton>
+          </IonSegment>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>

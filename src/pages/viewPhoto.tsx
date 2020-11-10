@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Photo,
-  getPhotosFromApi,
-  dateToShortFormat,
-} from "../data/mars-photos";
+import { Photo, getPhotosFromApi } from "../data/mars-photos";
 import {
   IonBackButton,
   IonButtons,
