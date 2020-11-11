@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { fireStore } from '../firebaseConfig';
 export type Photo  = {
     id: number
     sol: number
@@ -43,7 +44,7 @@ export const dateToShortFormat = function (date: Date) {
 
 
 
-export function getPhotosFromApi(dateChosen: String) {
+export function getPhotosFromNasaApi(dateChosen: String) {
     
       return axios({
         method: 'get',
@@ -63,7 +64,12 @@ export function getPhotosFromApi(dateChosen: String) {
     }
 
 
-// export const getPhoto = getPhotosFromApi(id: number) => getPhotos.find(p => p.id === id)
+export function getSavedPhotos() {
+    return fireStore.collection("Photos").get();
+ 
+}
+
+// export const getPhoto = getPhotosFromNasaApi(id: number) => getPhotos.find(p => p.id === id)
 
 
 

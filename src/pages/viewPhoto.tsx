@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Photo, getPhotosFromApi } from "../data/mars-photos";
+import { Photo, getPhotosFromNasaApi } from "../data/mars-photos";
 import {
   IonBackButton,
   IonButtons,
@@ -29,11 +29,11 @@ interface ViewMessageProps
 
 const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
   const [photo, setPhoto] = useState<Photo>();
-  const [favorite, setFavorite] = useState(false);
+  const [favorite, setFavorite] = useState(0);
   const imgId = parseInt(match.params.id, 10);
   const date = match.params.date;
   const getPic = (id: number) =>
-    getPhotosFromApi(date)
+    getPhotosFromNasaApi(date)
       .then((resp) => resp.data)
       .then(
         (images) => {
@@ -72,7 +72,7 @@ const ViewPhoto: React.FC<ViewMessageProps> = ({ match }) => {
       .catch(function (error: String) {
         console.error("Error adding document: ", error);
       });
-    setFavorite(true);
+    setFavorite(favorite + 1);
   };
   return (
     <IonPage id="view-message-page">

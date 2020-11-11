@@ -3,7 +3,7 @@ import { IonItem, IonLabel, IonNote, IonImg, IonThumbnail } from "@ionic/react";
 import { Photo } from "../data/mars-photos";
 import "./MessageListItem.css";
 
-interface PhotoListItemProps {
+export interface PhotoListItemProps {
   photo: Photo;
 }
 

@@ -2,7 +2,7 @@ import PhotoListItem from "../components/PhotoListItem";
 import React, { useState } from "react";
 import {
   Photo,
-  getPhotosFromApi,
+  getPhotosFromNasaApi,
   dateToShortFormat,
 } from "../data/mars-photos";
 import {
@@ -22,10 +22,18 @@ import {
   useIonViewDidLeave,
   useIonViewDidEnter,
   IonButtons,
+  IonTabs,
+  IonTabBar,
+  IonTabButton,
+  IonBadge,
   IonSegment,
   IonSegmentButton,
+  IonRouterOutlet,
 } from "@ionic/react";
+
+import { bookmark, heart } from "ionicons/icons";
 import "./Home.css";
+import { Redirect, Route } from "react-router";
 
 const Home: React.FC = () => {
   const [photos, setPhotos] = useState<Photo[]>();
@@ -38,7 +46,7 @@ const Home: React.FC = () => {
   };
 
   const pics = (selectedDate: String) =>
-    getPhotosFromApi(selectedDate)
+    getPhotosFromNasaApi(selectedDate)
       .then((resp) => resp.data)
       .then(
         (images) => {
@@ -85,10 +93,7 @@ const Home: React.FC = () => {
     <IonPage id="home-page">
       <IonHeader>
         <IonToolbar>
-          <IonSegment>
-            <IonSegmentButton value="new">Mars Rover Images</IonSegmentButton>
-            <IonSegmentButton value="hot">Favorited Images</IonSegmentButton>
-          </IonSegment>
+          <IonTitle>Mars Rover Photos </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
